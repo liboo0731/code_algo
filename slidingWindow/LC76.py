@@ -31,6 +31,9 @@ def min_window(s, t):
             if need[char_r] == window[char_r]:
                 valid += 1
 
+        # debug位置
+        # print(s[left:right])
+
         # 判断左窗口是否要收缩
         while valid == need_len:
             # 在这里更新最小覆盖子串
