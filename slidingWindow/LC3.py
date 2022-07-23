@@ -25,12 +25,12 @@ def longest_substring(s):
 
         # 判断左窗口是否要收缩
         while window[char_r] > 1:
-            min_len = max(min_len, len(window))
             # 将要移出窗口的字符
             char_l = s[left]
             # 缩小窗口
             left += 1
             # 进行窗口内数据更新
+            min_len = max(min_len, len(window))
             window[char_l] -= 1
 
     return min_len
