@@ -43,7 +43,7 @@ def move_car():
 def move_car2():
     orders = input().strip()
     location = [0, 0]
-    # 东南西北: 0123
+    # 东北西南: 0123
     direction = 1
 
     for x in orders:
