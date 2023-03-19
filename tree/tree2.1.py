@@ -33,10 +33,16 @@ class TreeOperations:
 
         return root
 
+    # 递归遍历，前中后序
     def print_tree_dfs(self, root: TreeNode, res=None):
         if res is None:
-            from collections import defaultdict
-            res = defaultdict(list)
+            # from collections import defaultdict
+            # res = defaultdict(list)
+            res = {
+                "pre": [],
+                "mid": [],
+                "lst": []
+            }
         if not root:
             return
         # 前序
@@ -50,35 +56,49 @@ class TreeOperations:
 
         return res
 
+    # 层序遍历，分层记录
     @staticmethod
-    def print_tree_bfs(root: TreeNode, res=None):
-        if res is None:
-            res = list()
+    def print_tree_bfs(root: TreeNode):
         if not root:
             return
-
-        from collections import deque
-        dq = deque()
-        dq.append(root)
-
-        while dq:
-            dp_size = len(dq)
-            # 记录当前层节点
+        res = list()
+        # 可以使用标准库中队列操作
+        # from collections import deque
+        # deque.popleft()
+        deque = [root]
+        while deque:
+            dp_size = len(deque)
+            # 分层记录
             level_list = list()
-
             for _ in range(dp_size):
                 # 不能使用下标来标记节点，因为队列的长度循环一次后就会变化，而range始终按照最开始长度迭代
-                node = dq.popleft()
+                node = deque.pop(0)
                 level_list.append(node.val)
-                # res.append(node.val)
-
                 if node.left:
-                    dq.append(node.left)
+                    deque.append(node.left)
                 if node.right:
-                    dq.append(node.right)
-
+                    deque.append(node.right)
             res.append(level_list)
+        return res
 
+    # 层序遍历
+    @staticmethod
+    def print_tree_bfs1(root: TreeNode):
+        if not root:
+            return
+        res = list()
+        # 根节点先放入队列
+        deque = [root]
+        # 从上往下，从左往右操作
+        while deque:
+            # 从左往右出队列
+            node = deque.pop(0)
+            res.append(node.val)
+            # 从左往右加入队列
+            if node.left:
+                deque.append(node.left)
+            if node.right:
+                deque.append(node.right)
         return res
 
 
